@@ -4,10 +4,10 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Response<T> {
-    private T data;
-    private Status status;
-    private String message;
-    private StackTraceElement error;
+    private final T data;
+    private final Status status;
+    private final String message;
+    private final StackTraceElement error;
 
     @JsonCreator
     public Response(@JsonProperty("data") T data , @JsonProperty("status") Status status, @JsonProperty("message") String message, @JsonProperty("error") StackTraceElement error) {
