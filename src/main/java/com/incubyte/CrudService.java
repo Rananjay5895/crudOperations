@@ -5,8 +5,8 @@ import io.micronaut.context.annotation.Bean;
 
 import java.util.Optional;
 
-@Bean
-public class CrudService {
+@Singleton
+public class UserService {
     private final DemoCrudRepository crudRepository;
 
     public CrudService(DemoCrudRepository crudRepository) {
@@ -25,6 +25,8 @@ public class CrudService {
     public User update(Long id, User user) {
         Optional<User> userDetail = crudRepository.findById(id);
         User savedUser;
+
+        //TODO: Throw Exception 
         if (userDetail.isPresent()) {
             savedUser = userDetail.get();
         } else throw new CustomException("user not available");
@@ -34,8 +36,9 @@ public class CrudService {
         return crudRepository.update(savedUser);
     }
 
-    public Response<String> deleteById(Long id) {
-        crudRepository.deleteById(id);
+    public String deleteById(Long id) {
+        //TODO: Response is something that is relavant to the Controller or API Layer. It has nothing 
+        return crudRepository.deleteById(id);
         return new Response<String>(null, Response.Status.SUCCESS, "Successfully deleted message", null);
     }
 

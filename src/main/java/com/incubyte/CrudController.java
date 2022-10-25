@@ -3,7 +3,7 @@ package com.incubyte;
 import io.micronaut.http.annotation.*;
 
 @Controller("/subscribe")
-public class CrudController {
+public class UserController {
     private final CrudService crudService;
 
     public CrudController(CrudService crudService) {
@@ -12,8 +12,10 @@ public class CrudController {
     }
 
     @Post("/")
-    public Response<User> save(User user) {
+    public Response<User> save(@Body User user) {
         User savedUser =crudService.save(user);
+        //TODO: Create static methods that will allow you to pass just the user
+        return Response.success(savedUser);
         return new Response<>(savedUser, Response.Status.SUCCESS, null, null);
     }
 
