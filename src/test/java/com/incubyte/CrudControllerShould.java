@@ -14,9 +14,12 @@ public class CrudControllerShould {
     @Mock
     CrudService crudService;
 
+    //TODO: Create one instance of crudController on top. Maybe in beforeeach
+
     @Test
     @DisplayName("Should Invoke Save Method Of Service")
-    public void should_invoke_save_method_of_service() {
+    //TODO: Remove should from names
+    public void invoke_save_method_of_service() {
         User user = new User("rananjay.singh5895@gmail.com", "Rananjay", "Singh", 28);
         CrudController crudController = new CrudController(crudService);
         crudController.save(user);
@@ -36,7 +39,9 @@ public class CrudControllerShould {
     public void should_invoke_update_method_of_service() {
         User user = new User("rananjay.singh5895@rediffmail.com", "Ran", "Singh", 29);
         CrudController crudController = new CrudController(crudService);
-        crudController.update(1L, user);
+        //TODO: Use return type and not null assertions
+        User user = crudController.update(1L, user);
+        assertNotNull(user);
         verify(crudService).update(1L, user);
     }
 

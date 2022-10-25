@@ -22,6 +22,7 @@ public class CrudControllerTest {
         assertThat(userResponse.getFirstName()).isNotNull();
         assertThat(userResponse.getLastName()).isNotNull();
         assertThat(userResponse.getAge()).isGreaterThan(0);
+        //TODO: Check for AutoIncrement. Check if the value is not null for ID
     }
 
     @Test

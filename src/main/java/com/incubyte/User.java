@@ -18,7 +18,8 @@ public class User {
     private String lastName;
     private int age;
 
-    public User() {
+    //TODO: Make default constructors private
+    private User() {
     }
 
     @JsonCreator

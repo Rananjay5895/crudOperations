@@ -3,6 +3,7 @@ package com.incubyte;
 import io.micronaut.http.annotation.*;
 import io.micronaut.http.client.annotation.Client;
 
+//TODO: Move it to Test Folder Structure
 @Client("/subscribe")
 public interface CrudClient {
     @Get("/subscriber/{id}")
