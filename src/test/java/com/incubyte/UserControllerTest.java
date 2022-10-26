@@ -33,7 +33,6 @@ public class UserControllerTest {
         User userResponse = client.save(user).getData();
         User findUser = client.findById(userResponse.getId()).getData();
         assertThat(findUser.getId()).isNotNull();
-        //   Response<User> response = client.toBlocking().retrieve(HttpRequest.GET("/subscriber/" + userResponse.getId()), Argument.of(Response.class , User.class));
         assertThat(findUser.getEmail()).isNotNull();
         assertThat(findUser.getFirstName()).isNotNull();
         assertThat(findUser.getLastName()).isNotNull();

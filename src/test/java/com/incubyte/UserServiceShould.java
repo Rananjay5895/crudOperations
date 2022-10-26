@@ -8,6 +8,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -42,7 +43,9 @@ public class UserServiceShould {
         User user = new User("rananjay.singh5895@rediffmail.com", "Ran", "Singh", 29);
         UserService userService = new UserService(crudRepository);
         when(crudRepository.findById(1L)).thenReturn(Optional.of(user));
-        userService.update(1L, user);
+        when(crudRepository.update(user)).thenReturn(user);
+        User updatedUser = userService.update(1L, user);
+        assertNotNull(updatedUser);
         verify(crudRepository).update(user);
     }
 
