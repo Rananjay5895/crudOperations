@@ -9,7 +9,7 @@ public interface CrudClient {
     Response<User> findById(@PathVariable Long id);
 
     @Post("/")
-    Response<User> save(User user);
+    Response<User> save(@Body User user);
 
     @Put("/{id}")
     Response<User> update(@PathVariable Long id , @Body User user);

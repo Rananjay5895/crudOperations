@@ -1,6 +1,6 @@
 package com.incubyte;
 
-import io.micronaut.http.HttpRequest;
+import com.incubyte.client.CrudClient;
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
 import jakarta.inject.Inject;
 import org.junit.jupiter.api.DisplayName;
@@ -18,6 +18,7 @@ public class CrudControllerTest {
         User user = new User("rananjay.singh5895@gmail.com", "Rananjay", "Singh", 28);
         User userResponse = client.save(user).getData();
         assertThat(userResponse).isNotNull();
+        assertThat(userResponse.getId()).isNotNull();
         assertThat(userResponse.getEmail()).isNotNull();
         assertThat(userResponse.getFirstName()).isNotNull();
         assertThat(userResponse.getLastName()).isNotNull();
@@ -30,6 +31,7 @@ public class CrudControllerTest {
         User user = new User("rananjay.singh5895@gmail.com", "Rananjay", "Singh", 28);
         User userResponse = client.save(user).getData();
         User findUser = client.findById(userResponse.getId()).getData();
+        assertThat(findUser.getId()).isNotNull();
         //   Response<User> response = client.toBlocking().retrieve(HttpRequest.GET("/subscriber/" + userResponse.getId()), Argument.of(Response.class , User.class));
         assertThat(findUser.getEmail()).isNotNull();
         assertThat(findUser.getFirstName()).isNotNull();
@@ -44,6 +46,7 @@ public class CrudControllerTest {
         User user2 = new User("rananjay.singh5895@rediffmail.com", "Ran", "Singh", 29);
         User savedUser = client.save(user1).getData();
         User updatedUser = client.update(savedUser.getId(),user2).getData();
+        assertThat(updatedUser.getId()).isNotNull();
         assertThat(updatedUser.getEmail()).isEqualTo("rananjay.singh5895@rediffmail.com");
         assertThat(updatedUser.getFirstName()).isEqualTo("Ran");
         assertThat(updatedUser.getAge()).isEqualTo(29);

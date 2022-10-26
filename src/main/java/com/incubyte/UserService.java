@@ -1,15 +1,15 @@
 package com.incubyte;
 
 import com.incubyte.exception.CustomException;
-import io.micronaut.context.annotation.Bean;
+import jakarta.inject.Singleton;
 
 import java.util.Optional;
 
-@Bean
+@Singleton
 public class CrudService {
-    private final DemoCrudRepository crudRepository;
+    private final UserCrudRepository crudRepository;
 
-    public CrudService(DemoCrudRepository crudRepository) {
+    public CrudService(UserCrudRepository crudRepository) {
 
         this.crudRepository = crudRepository;
     }
@@ -34,9 +34,9 @@ public class CrudService {
         return crudRepository.update(savedUser);
     }
 
-    public Response<String> deleteById(Long id) {
+    public User deleteById(Long id) {//Response<String>
         crudRepository.deleteById(id);
-        return new Response<String>(null, Response.Status.SUCCESS, "Successfully deleted message", null);
+        return crudRepository.findById(id).orElse(null);
+     //   return new Response<String>(null, Response.Status.SUCCESS, "Successfully deleted message", null);
     }
-
 }

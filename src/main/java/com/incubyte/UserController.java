@@ -12,7 +12,7 @@ public class CrudController {
     }
 
     @Post("/")
-    public Response<User> save(User user) {
+    public Response<User> save(@Body User user) {
         User savedUser =crudService.save(user);
         return new Response<>(savedUser, Response.Status.SUCCESS, null, null);
     }
@@ -31,8 +31,9 @@ public class CrudController {
     }
 
     @Delete("/{id}")
-    public Response<String> deleteById(@PathVariable Long id) {
-        return crudService.deleteById(id);
+    public Response<User> deleteById(@PathVariable Long id) {
+        User deletedUser = crudService.deleteById(id);
+        return new Response<>(deletedUser,Response.Status.SUCCESS,null,null);
     }
 
 }
