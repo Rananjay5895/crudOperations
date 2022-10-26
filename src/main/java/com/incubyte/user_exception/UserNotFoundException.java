@@ -1,8 +1,8 @@
-package com.incubyte.exception;
+package com.incubyte.user_exception;
 
-public class CustomException extends RuntimeException{
+public class UserNotFoundException extends RuntimeException{
 
-    public CustomException(String message) {
+    public UserNotFoundException(String message) {
         super(message);
     }
 }

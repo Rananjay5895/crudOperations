@@ -1,42 +1,38 @@
 package com.incubyte;
 
-import com.incubyte.exception.CustomException;
+import com.incubyte.user_exception.UserNotFoundException;
 import jakarta.inject.Singleton;
 
-import java.util.Optional;
+import javax.validation.constraints.NotNull;
 
 @Singleton
-public class CrudService {
-    private final UserCrudRepository crudRepository;
+public class UserService {
+    private final UserRepository userRepository;
 
-    public CrudService(UserCrudRepository crudRepository) {
+    public UserService(UserRepository userRepository) {
 
-        this.crudRepository = crudRepository;
+        this.userRepository = userRepository;
     }
 
     public User save(User user) {
-        return crudRepository.save(user);
+        return userRepository.save(user);
     }
 
     public User findById(long id) {
-        return crudRepository.findById(id).orElse(null);
+        return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("User Not Found"));
     }
 
     public User update(Long id, User user) {
-        Optional<User> userDetail = crudRepository.findById(id);
-        User savedUser;
-        if (userDetail.isPresent()) {
-            savedUser = userDetail.get();
-        } else throw new CustomException("user not available");
-        savedUser.setEmail(user.getEmail());
-        savedUser.setFirstName(user.getFirstName());
-        savedUser.setAge(user.getAge());
-        return crudRepository.update(savedUser);
+        User userDetail = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("User Not Found"));
+        userDetail.setEmail(user.getEmail());
+        userDetail.setFirstName(user.getFirstName());
+        userDetail.setAge(user.getAge());
+        return userRepository.update(userDetail);
     }
 
     public User deleteById(Long id) {//Response<String>
-        crudRepository.deleteById(id);
-        return crudRepository.findById(id).orElse(null);
-     //   return new Response<String>(null, Response.Status.SUCCESS, "Successfully deleted message", null);
+        userRepository.deleteById(id);
+        return userRepository.findById(id).orElse(null);
+        //   return new Response<String>(null, Response.Status.SUCCESS, "Successfully deleted message", null);
     }
 }

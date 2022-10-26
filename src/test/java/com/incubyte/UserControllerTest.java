@@ -3,12 +3,13 @@ package com.incubyte;
 import com.incubyte.client.CrudClient;
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
 import jakarta.inject.Inject;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @MicronautTest
-public class CrudControllerTest {
+public class UserControllerTest {
     @Inject
     CrudClient client;
 

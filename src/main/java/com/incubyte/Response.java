@@ -33,8 +33,13 @@ public class Response<T> {
         return error;
     }
 
+    public static <T>Response<T> success(T data) {
+        return new Response<>(data, Status.SUCCESS, null, null);
+    }
+
     enum Status {
-        SUCCESS("Success"), FAILED("Failed");
+        SUCCESS("Success"),
+        FAILED("Failed");
 
         private final String status;
 

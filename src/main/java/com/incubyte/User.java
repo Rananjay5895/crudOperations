@@ -8,7 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity
+@Entity(name="User")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,7 +18,7 @@ public class User {
     private String lastName;
     private int age;
 
-    public User() {
+    private User() {
     }
 
     @JsonCreator

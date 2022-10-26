@@ -1,5 +1,7 @@
-package com.incubyte;
+package com.incubyte.client;
 
+import com.incubyte.Response;
+import com.incubyte.User;
 import io.micronaut.http.annotation.*;
 import io.micronaut.http.client.annotation.Client;
 
